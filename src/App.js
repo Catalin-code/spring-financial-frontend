@@ -5,15 +5,21 @@ import Slider from "./components/Slider";
 import { InfoData } from "./data/InfoData";
 import { SliderData } from "./data/SliderData";
 import GlobalStyle from "./globalStyles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import About from "./components/About";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <>
+    <Router>
       <GlobalStyle />
-      <Navbar />
-      <Slider slides={SliderData} />
-      <InfoSection {...InfoData} />
-    </>
+      <Switch>
+        <Route path="/about" component={About} />
+        <Route path="/" component={Home} />
+      </Switch>
+      {/* <Slider slides={SliderData} />
+      <InfoSection {...InfoData} /> */}
+    </Router>
   );
 }
 
