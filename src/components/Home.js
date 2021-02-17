@@ -4,6 +4,7 @@ import InfoSection from "./InfoSection";
 import { InfoData } from "../data/InfoData";
 import { SliderData } from "../data/SliderData";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <Navbar />
       <Slider slides={SliderData} />
       <InfoSection {...InfoData} />
+      <Footer />
     </>
   );
 }
