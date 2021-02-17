@@ -23,13 +23,21 @@ const Container = styled.div`
   }
 `;
 
+function test() {
+  document.location.href = "http://localhost:3000/test";
+}
+
 function Login() {
   return (
     <>
       <Navbar />
       <Section>
         <Container>
-          <form>
+          <form
+            onSubmit={() => {
+              test();
+            }}
+          >
             <h3>Log in</h3>
 
             <div className="form-group align-items-center">
