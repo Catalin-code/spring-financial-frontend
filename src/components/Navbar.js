@@ -86,7 +86,7 @@ const Navbar = () => {
         ))}
       </NavMenu>
       <NavBtn>
-        <Button to="/contact" primary="true">
+        <Button to="/login" primary="true">
           Login
         </Button>
       </NavBtn>
