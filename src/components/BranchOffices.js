@@ -1,35 +1,62 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
+import styled from "styled-components";
 import getBranchOfficeData from "../data/BranchOfficeData";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-
+const Section = styled.section`
+  width: 100%;
+  height: 100%;
+  padding: 4rem 0rem;
+  background-color: #000d1a;
+`;
+const Container = styled.div`
+  padding: 15rem calc((100vw - 1300px) / 2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 800px;
+  color: white;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
 
 
 function BranchOffices() {
-    const [branchOfficeData, setBranchOfficeData] = useState([]);
+    const [branchOfficeData, setBranchOfficeData] = useState(null);
 
     const getData = async () => {
         try {
-            const data = await getBranchOfficeData();
-            setBranchOfficeData(data);
-        } catch (error) {
-            console.log(error.message);
+          const data = await getBranchOfficeData();
+          setBranchOfficeData(data);
+          console.log(data);
+        } catch (err) {
+          console.log(err.message);
         }
-    };
+      };
 
     useEffect(() => {
-        getBranchOfficeData();
-        getData();
+    getBranchOfficeData();
+    getData();
     }, []);
+    
 
     return (
         <>
             <Navbar />
-            <div>
-                {branchOfficeData.length > 0 && branchOfficeData.map(branchOffice => (
-                    <h4>{branchOffice.name}</h4>
-                    ))}
-            </div>
+            <Section>
+                <Container>
+                    {branchOfficeData !== null ? (
+                        <div>
+                            <h1>Name</h1>
+                            <p>{branchOfficeData.name}</p>
+                            <h1>Address</h1>
+                            <p>{branchOfficeData.address}</p>
+                        </div>
+                    ) : null}
+                </Container>
+            </Section>
+            <Footer/>
         </>
     );
 }
