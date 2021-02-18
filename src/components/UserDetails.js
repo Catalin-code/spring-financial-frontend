@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { getUserData } from "../data/UserData";
 import styled from "styled-components";
-import User1 from "../userImages/user1.jpg";
+import { useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 const Section = styled.section`
   width: 100%;
@@ -72,13 +73,18 @@ const ColumnRight = styled.div`
 `;
 
 function UserDetails() {
+  let { pid } = useParams();
   const [userData, setUserData] = useState(null);
-  const [userPid, setUserPid] = useState("5050603409873");
+  const [userPid, setUserPid] = useState(pid);
+  const [userImage, setUserImage] = useState(null);
 
   const getData = async () => {
     try {
       const data = await getUserData(userPid);
       setUserData(data);
+      console.log(data);
+      setUserImage(`/userImages/user${data.id}.jpg`);
+      console.log(userImage);
     } catch (err) {
       console.log(err.message);
     }
@@ -128,9 +134,14 @@ function UserDetails() {
             ) : null}
           </ColumnLeft>
           <ColumnRight>
-            <img src={User1} alt="" />
+            <img src={userImage} alt="" />
           </ColumnRight>
         </Container>
+        <div style={{ textAlign: "center" }}>
+          <Button variant="danger" size="lg" style={{ marginRight: "3rem" }}>
+            View Accounts
+          </Button>
+        </div>
       </Section>
     </>
   );
