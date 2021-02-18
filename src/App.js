@@ -11,12 +11,14 @@ import About from "./components/About";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import UserDetails from "./components/UserDetails";
-
+import FAQ from "./components/FAQ";
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <Router>
       <GlobalStyle />
       <Switch>
+        <Route exact path="/faq" component={FAQ} />
         <Route path="/about" component={About} />
         <Route path="/customer/:pid" component={UserDetails} />
         <Route path="/login" component={Login} />
