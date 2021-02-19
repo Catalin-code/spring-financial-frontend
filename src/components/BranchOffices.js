@@ -17,10 +17,9 @@ const Container = styled.div`
   grid-template-rows: 800px;
   color: white;
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
   }
 `;
-
 
 function BranchOffices() {
     const [branchOfficeData, setBranchOfficeData] = useState(null);
@@ -29,16 +28,16 @@ function BranchOffices() {
         try {
           const data = await getBranchOfficeData();
           setBranchOfficeData(data);
-          console.log(data);
+          console.log(branchOfficeData);
         } catch (err) {
           console.log(err.message);
         }
       };
 
-    useEffect(() => {
-    getBranchOfficeData();
-    getData();
-    }, []);
+      useEffect(() => {
+        getBranchOfficeData();
+        getData();
+      });
     
 
     return (
@@ -46,14 +45,7 @@ function BranchOffices() {
             <Navbar />
             <Section>
                 <Container>
-                    {branchOfficeData !== null ? (
-                        <div>
-                            <h1>Name</h1>
-                            <p>{branchOfficeData.name}</p>
-                            <h1>Address</h1>
-                            <p>{branchOfficeData.address}</p>
-                        </div>
-                    ) : null}
+                  
                 </Container>
             </Section>
             <Footer/>
