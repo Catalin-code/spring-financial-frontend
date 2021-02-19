@@ -3,6 +3,7 @@ import styled from "styled-components";
 import getBranchOfficeData from "../data/BranchOfficeData";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from "axios";
 
 const Section = styled.section`
   width: 100%;
@@ -21,13 +22,15 @@ const Container = styled.div`
   }
 `;
 
-function BranchOffices() {
-    const [branchOfficeData, setBranchOfficeData] = useState(null);
 
+function BranchOffices() {
+    const baseUrl = "http://localhost:8080/api/locations/1"
+    const [branchOfficeData, setBranchOfficeData] = useState({});
     const getData = async () => {
         try {
-          const data = await getBranchOfficeData();
-          setBranchOfficeData(data);
+          const response = await axios.get(baseUrl)
+          setBranchOfficeData(response.data);
+          console.log(response);
           console.log(branchOfficeData);
         } catch (err) {
           console.log(err.message);
@@ -35,9 +38,8 @@ function BranchOffices() {
       };
 
       useEffect(() => {
-        getBranchOfficeData();
-        getData();
-      });
+         getData();
+      }, []);
     
 
     return (
@@ -45,7 +47,10 @@ function BranchOffices() {
             <Navbar />
             <Section>
                 <Container>
-                  
+                  <div>
+                    <p>{branchOfficeData.name}</p>
+                    {console.log(branchOfficeData)}
+                  </div>
                 </Container>
             </Section>
             <Footer/>

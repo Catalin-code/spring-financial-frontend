@@ -1,9 +1,4 @@
 import React from "react";
-import InfoSection from "./components/InfoSection";
-import Navbar from "./components/Navbar";
-import Slider from "./components/Slider";
-import { InfoData } from "./data/InfoData";
-import { SliderData } from "./data/SliderData";
 import GlobalStyle from "./globalStyles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/About";
