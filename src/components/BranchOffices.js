@@ -38,13 +38,6 @@ function BranchOffices() {
          getData();
       }, []);
 
-      const renderBranchOffice = (b) =>{
-          console.log(b);
-          <>
-            <p>{b.name}</p>
-            <p>{b.address}</p>
-          </>
-      }
 
     return (
         <>
@@ -52,7 +45,13 @@ function BranchOffices() {
             <Section>
                 <Container>
                   <div>
-                    {branchOfficeData.map(renderBranchOffice)}
+                    {branchOfficeData.map(b => 
+                    <div>
+											<div>
+												<p>{b.name}</p>
+												<p>{b.address}</p>
+                      </div>
+										</div>)}
                   </div>
                 </Container>
             </Section>
