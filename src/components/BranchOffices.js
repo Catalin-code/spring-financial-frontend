@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import getBranchOfficeData from "../data/BranchOfficeData";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
@@ -22,16 +21,14 @@ const Container = styled.div`
   }
 `;
 
-
 function BranchOffices() {
-    const baseUrl = "http://localhost:8080/api/locations/1"
-    const [branchOfficeData, setBranchOfficeData] = useState({});
+    const baseUrl = "http://localhost:8080/api/locations/"
+    const [branchOfficeData, setBranchOfficeData] = useState([]);
+
     const getData = async () => {
         try {
-          const response = await axios.get(baseUrl)
-          setBranchOfficeData(response.data);
-          console.log(response);
-          console.log(branchOfficeData);
+          const { data } = await axios.get(baseUrl)
+          setBranchOfficeData(data);
         } catch (err) {
           console.log(err.message);
         }
@@ -40,7 +37,14 @@ function BranchOffices() {
       useEffect(() => {
          getData();
       }, []);
-    
+
+      const renderBranchOffice = (b) =>{
+          console.log(b);
+          <>
+            <p>{b.name}</p>
+            <p>{b.address}</p>
+          </>
+      }
 
     return (
         <>
@@ -48,8 +52,7 @@ function BranchOffices() {
             <Section>
                 <Container>
                   <div>
-                    <p>{branchOfficeData.name}</p>
-                    {console.log(branchOfficeData)}
+                    {branchOfficeData.map(renderBranchOffice)}
                   </div>
                 </Container>
             </Section>
