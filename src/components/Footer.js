@@ -131,7 +131,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p className="text-xs-center">
+          <p className="text-xs-center" style={{ color: "white" }}>
             &copy;{new Date().getFullYear()} Spring Financial - All Rights
             Reserved
           </p>
