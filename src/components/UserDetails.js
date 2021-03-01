@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import { getUserData } from "../data/UserData";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -143,6 +144,7 @@ function UserDetails() {
           </Button>
         </div>
       </Section>
+      <Footer />
     </>
   );
 }
