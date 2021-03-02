@@ -1,5 +1,6 @@
 import React from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "./globalStyles";
 import {
   BrowserRouter as Router,
@@ -12,7 +13,8 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import UserDetails from "./components/UserDetails";
 import FAQ from "./components/FAQ";
-import "bootstrap/dist/css/bootstrap.min.css";
+import BranchOffices from "./components/BranchOffices";
+
 function App() {
   return (
     <Router>
@@ -20,6 +22,7 @@ function App() {
       <Switch>
         <Route exact path="/faq" component={FAQ} />
         <Route path="/about" component={About} />
+        <Route path="/branch-offices" component={BranchOffices} />
         <Route path="/customer/:pid" component={UserDetails} />
         <Route path="/login" component={Login} />
         <Route path="/" component={Home} />
