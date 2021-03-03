@@ -89,8 +89,13 @@ function AccountDetails() {
 
         if (request.ok) {
             const data = await request.json();
+            const cid = data.data
+                .map((d) => d.customerId)
+                .filter((e, i, a) => !a.slice(0, i).includes(e))
+                .pop();
+
             setAccountData(data.data);
-            setAccountId(data.data.id);
+            setAccountId(cid);
         }
     };
 
