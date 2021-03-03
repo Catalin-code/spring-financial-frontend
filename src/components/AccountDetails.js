@@ -3,7 +3,6 @@ import Navbar from "./Navbar";
 import { getAccountData } from "../data/AccountData";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 const Section = styled.section`
     width: 100%;
@@ -86,33 +85,21 @@ function AccountDetails() {
     let [accountId, setAccountId] = useState(id);
 
     const getData = async (customerId) => {
-        try {
-            const { data } = await axios.get(`${baseUrl}=${customerId}`);
-            setAccountData(data);
-            setAccountId(accountData.id);
-        } catch (err) {
-            console.log(err.message);
+        const request = await fetch(`${baseUrl}=${customerId}`);
+
+        if (request.ok) {
+            const data = await request.json();
+            setAccountData(data.data);
+            setAccountId(data.data.id);
         }
     };
-    // const getCardData = async (accountId) => {
-    //     try {
-    //         const { data } = await axios.get(`${baseUrlCard}=${accountId}`)
-    //         console.log(data);
-    //         setCardData(data);
-    //         console.log("Am ajuns aici");
-    //         console.log(cardData);
-    //     } catch (err) {
-    //         console.log(err.message);
-    //     }
-    // };
-    const getCardData = (accountId = id) => {
-        axios
-            .get(baseUrlCard + "=" + accountId)
-            .then((data) => {
-                setCardData(data.data);
-                console.log(cardData);
-            })
-            .catch((error) => console.log(error.message));
+
+    const getCardData = async (accountId) => {
+        const request = await fetch(`${baseUrlCard}=${accountId}`);
+        if (request.ok) {
+            const data = await request.json();
+            setCardData(data.data);
+        }
     };
 
     useEffect(() => {
