@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import InfoSection from "./InfoSection";
 import { InfoData3 } from "../data/InfoData";
 import React from "react";
-import Faq from 'react-faq-component';
+import Faq from "react-faq-component";
 import styled from "styled-components";
 
 const data = {
@@ -36,52 +36,51 @@ const data = {
   }
 
 const Section = styled.section`
-  width: 100%;
-  height: 100%;
-  padding: 10rem 0rem;
-  margin: 0rem 0rem;
-  background-color: #000d1a;
-  text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 10rem 0rem;
+    margin: 0rem 0rem;
+    background-color: #000d1a;
+    text-align: center;
 `;
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 800px;
-  color: white;
-  h2 {
-    text-align: center;
-    align-items: center;
-  }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 800px;
+    color: white;
+    h2 {
+        text-align: center;
+        align-items: center;
+    }
 `;
 const styles = {
-    bgColor: '#000d1a',
-    titleTextColor: 'white',
-    titleTextSize: '48px',
-    rowTitleColor: 'white',
-    rowTitleTextSize: 'medium',
-    rowContentColor: 'grey',
-    rowContentTextSize: '16px',
-    rowContentPaddingTop: '10px',
-    rowContentPaddingBottom: '10px',
-    rowContentPaddingLeft: '50px',
-    rowContentPaddingRight: '15px',
+    bgColor: "#000d1a",
+    titleTextColor: "white",
+    titleTextSize: "48px",
+    rowTitleColor: "white",
+    rowTitleTextSize: "medium",
+    rowContentColor: "grey",
+    rowContentTextSize: "16px",
+    rowContentPaddingTop: "10px",
+    rowContentPaddingBottom: "10px",
+    rowContentPaddingLeft: "50px",
+    rowContentPaddingRight: "15px",
     arrowColor: "white",
     transitionDuration: "1s",
-    timingFunc: "ease"
+    timingFunc: "ease",
 };
-function FAQ(){
+
+function FAQ() {
     return (
         <>
-          <Navbar />
-          <Section>
-            <Container>
-                <Faq
-                  data={data}
-                  styles={styles}
-                />
-              </Container>
-          </Section>
+            <Navbar />
+            <Section>
+                <Container>
+                    <Faq data={data} styles={styles} />
+                </Container>
+            </Section>
         </>
     );
 }
+
 export default FAQ;

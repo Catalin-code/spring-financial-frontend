@@ -7,14 +7,14 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 function Home() {
-  return (
-    <>
-      <Navbar />
-      <Slider slides={SliderData} />
-      <InfoSection {...InfoData} />
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Navbar />
+            <Slider slides={SliderData} />
+            <InfoSection {...InfoData} />
+            <Footer />
+        </>
+    );
 }
 
 export default Home;
