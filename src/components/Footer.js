@@ -3,12 +3,8 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 const FooterBody = styled.footer`
-  margin-top: 0.5rem;
   padding: 1rem;
   background-color: #0a1f34;
-  // position: fixed;
-  // bottom: 0;
-  // left: 0;
   width: 100%;
 `;
 
