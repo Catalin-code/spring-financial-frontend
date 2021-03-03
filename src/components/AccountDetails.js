@@ -89,12 +89,12 @@ function AccountDetails() {
 
         if (request.ok) {
             const data = await request.json();
-            const cid = data.data
+            const cid = data
                 .map((d) => d.customerId)
                 .filter((e, i, a) => !a.slice(0, i).includes(e))
                 .pop();
 
-            setAccountData(data.data);
+            setAccountData(data);
             setAccountId(cid);
         }
     };
@@ -103,14 +103,14 @@ function AccountDetails() {
         const request = await fetch(`${baseUrlCard}=${accountId}`);
         if (request.ok) {
             const data = await request.json();
-            setCardData(data.data);
+            setCardData(data);
         }
     };
 
     useEffect(() => {
         getData(id);
         getCardData(accountId);
-    }, [accountId]);
+    }, [accountId, cardData]);
 
     return (
         <>
