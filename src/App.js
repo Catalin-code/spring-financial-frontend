@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import UserDetails from "./components/UserDetails";
 import FAQ from "./components/FAQ";
+import AccountDetails from "./components/AccountDetails"
 import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/faq" component={FAQ} />
         <Route path="/about" component={About} />
         <Route path="/customer/:pid" component={UserDetails} />
+        <Route path="/account/:id" component={AccountDetails} />
         <Route path="/login" component={Login} />
         <Route path="/" component={Home} />
       </Switch>

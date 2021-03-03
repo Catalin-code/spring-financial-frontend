@@ -1,10 +1,6 @@
 
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-F
-src/reportWebVitals.js,1/c/1ce5e63ae1582ed0b425c46001299a07515efbf9
-A
-src/setupTests.js,b/7/b7e8d8f421068b8d51c89805d2035e747be2ff17
 G
 src/components/About.js,d/6/d6165385dd3b2349fa15517024d61938a0b122e6
 H
@@ -22,3 +18,17 @@ D
 src/App.js,1/e/1e43fa63aecd2127be034b3fb9d4caa172275714
 E
 src/components/FAQ.js,6/3/63b20a5cd6b91a3b45654de8434a2f1aa236ba5e
+H
+src/components/Footer.js,b/d/bd22e369de6b4e7c909c8598869bb4c2e3bc1508
+M
+src/components/InfoSection.js,6/8/68bae16e4ee074a12d9daeb619d59d82116bdb8f
+F
+src/components/Home.js,f/2/f26211afeb627356ce16431e96e36df40b415bc1
+G
+src/data/AccountData.js,2/6/263e4ba6866d867fcebc3262c743fb1363f82a53
+D
+src/data/UserData.js,e/3/e3dffd767b9676aff5827659352c3ffeac0f0320
+M
+src/components/UserDetails.js,1/8/18be1e19349d002c7be674422ab676ad76ace1c6
+P
+ src/components/AccountDetails.js,d/7/d7064adf49bb0d0b12e952a6100a23f1e6f8200d
