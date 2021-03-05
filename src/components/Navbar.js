@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { menuData } from "../data/MenuData";
 import { Button } from "./Button";
 import { FaBars } from "react-icons/fa";
 import logoOne from "../images/logo.png";
+
+import AuthService from "../services/auth.service";
 
 const Nav = styled.nav`
   height: 100px;
@@ -72,6 +74,20 @@ const NavBtn = styled.div`
 `;
 
 const Navbar = () => {
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+  };
+
   return (
     <Nav>
       <Logo to="/">
@@ -85,11 +101,40 @@ const Navbar = () => {
           </NavMenuLinks>
         ))}
       </NavMenu>
-      <NavBtn>
+      {/* <NavMenu>
+        {currentUser && <NavMenuLinks to={"/user"}>User</NavMenuLinks>}
+      </NavMenu> */}
+
+      <NavMenu>
+        {currentUser ? (
+          <React.Fragment>
+            <NavMenuLinks to={"/profile"}>
+              {currentUser.firstName + " " + currentUser.lastName}
+            </NavMenuLinks>
+            <NavBtn>
+              <Button to="/login" primary="true" onClick={logOut}>
+                Logout
+              </Button>
+            </NavBtn>
+          </React.Fragment>
+        ) : (
+          <NavMenuLinks>
+            <React.Fragment>
+              <NavBtn>
+                <Button to="/login" primary="true">
+                  Login
+                </Button>
+              </NavBtn>
+            </React.Fragment>
+          </NavMenuLinks>
+        )}
+      </NavMenu>
+
+      {/* <NavBtn>
         <Button to="/login" primary="true">
           Login
         </Button>
-      </NavBtn>
+      </NavBtn> */}
     </Nav>
   );
 };

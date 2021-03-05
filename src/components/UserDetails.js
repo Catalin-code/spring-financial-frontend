@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
+import AuthService from "../services/auth.service";
+
 const Section = styled.section`
   width: 100%;
   height: 100%;
@@ -60,41 +62,10 @@ const ColumnRight = styled.div`
   @media screen and (max-width: 768px) {
     order: ${({ reverse }) => (reverse ? "2" : "1")};
   }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    @media screen and (max-width: 768px) {
-      width: 90%;
-      height: 90%;
-    }
-  }
 `;
 
-function UserDetails() {
-  let { pid } = useParams();
-  const [userData, setUserData] = useState(null);
-  const [userPid, setUserPid] = useState(pid);
-  const [userImage, setUserImage] = useState(null);
-
-  const getData = async () => {
-    try {
-      const data = await getUserData(userPid);
-      setUserData(data);
-      console.log(data);
-      setUserImage(`/userImages/user${data.id}.jpg`);
-      console.log(userImage);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getUserData();
-    getData();
-  }, []);
+const UserDetails = () => {
+  const currentUser = AuthService.getCurrentUser();
 
   return (
     <>
@@ -102,40 +73,37 @@ function UserDetails() {
       <Section>
         <Container>
           <ColumnLeft>
-            {userData !== null ? (
-              <div>
-                <h1>First Name</h1>
-                <p>{userData.firstName}</p>
-                <hr />
-                <h1>Last Name</h1>
-                <p>{userData.lastName}</p>
-                <hr />
-                <h1>Date of birth</h1>
-                <p>{userData.dob}</p>
-                <hr />
-                <h1>Age</h1>
-                <p>{userData.age}</p>
-                <hr />
-                <h1>Address</h1>
-                <p>{userData.address}</p>
-                <hr />
-                <h1>Email</h1>
-                <p>{userData.email}</p>
-                <hr />
-                <h1>Gender</h1>
-                <p>{userData.gender}</p>
-                <hr />
-                <h1>Id Issue Date</h1>
-                <p>{userData.id_issued}</p>
-                <hr />
-                <h1>Id Expiry Date</h1>
-                <p>{userData.id_expiry}</p>
-                <hr />
-              </div>
-            ) : null}
+            <div>
+              <h1>First Name</h1>
+              <p>{currentUser.firstName}</p>
+              <hr />
+              <h1>Last Name</h1>
+              <p>{currentUser.lastName}</p>
+              <hr />
+              <h1>Date of birth</h1>
+              <p>{currentUser.dob}</p>
+              <hr />
+              <h1>Address</h1>
+              <p>{currentUser.address}</p>
+              <hr />
+              <h1>Email</h1>
+              <p>{currentUser.email}</p>
+              <hr />
+              <h1>Gender</h1>
+              <p>{currentUser.gender}</p>
+              <hr />
+              <h1>Id Issue Date</h1>
+              <p>{currentUser.idIssued}</p>
+              <hr />
+              <h1>Id Expiry Date</h1>
+              <p>{currentUser.idExpiry}</p>
+              <hr />
+            </div>
           </ColumnLeft>
           <ColumnRight>
-            <img src={userImage} alt="" />
+            <div>
+              <h3>Accounts / Cards placeholder div</h3>
+            </div>
           </ColumnRight>
         </Container>
         {userData !== null ? (
@@ -149,6 +117,6 @@ function UserDetails() {
       <Footer />
     </>
   );
-}
+};
 
 export default UserDetails;

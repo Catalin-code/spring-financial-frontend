@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import styled from "styled-components";
+
+import AuthService from "../services/auth.service";
+
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
 
 const Section = styled.section`
   width: 100%;
@@ -24,66 +39,112 @@ const Container = styled.div`
   }
 `;
 
-function test() {
-  document.location.href = "http://localhost:3000/test";
-}
+const Login = (props) => {
+  const form = useRef();
+  const checkBtn = useRef();
 
-function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
+  };
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    setMessage("");
+    setLoading(true);
+
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(username, password).then(
+        () => {
+          props.history.push("/profile");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          setLoading(false);
+          setMessage(resMessage);
+        }
+      );
+    } else {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
       <Section>
         <Container>
-          <form
-            onSubmit={() => {
-              test();
-            }}
-          >
+          <Form onSubmit={handleLogin} ref={form}>
             <h3>Log in</h3>
 
             <div className="form-group align-items-center">
-              <label>Private Identification Number</label>
-              <input
+              <label htmlFor="username">Private Identification Number</label>
+              <Input
                 type="number"
                 className="form-control"
+                name="username"
+                value={username}
+                onChange={onChangeUsername}
+                validations={[required]}
                 placeholder="Enter PID"
               />
             </div>
 
             <div className="form-group">
-              <label>Password</label>
-              <input
+              <label htmlFor="password">Password</label>
+              <Input
                 type="password"
                 className="form-control"
+                name="password"
+                value={password}
+                onChange={onChangePassword}
+                validations={[required]}
                 placeholder="Enter password"
               />
             </div>
 
             <div className="form-group">
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customCheck1"
-                />
-                <label className="custom-control-label" htmlFor="customCheck1">
-                  Remember me
-                </label>
-              </div>
+              <button className="btn btn-primary btn-block" disabled={loading}>
+                {loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                <span>Login</span>
+              </button>
             </div>
-
-            <button type="submit" className="btn btn-dark btn-lg btn-block">
-              Sign in
-            </button>
-            <p className="forgot-password text-right">
-              Forgot <a href="#">password?</a>
-            </p>
-          </form>
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
+            <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          </Form>
         </Container>
       </Section>
       <Footer />
     </>
   );
-}
+};
 
 export default Login;

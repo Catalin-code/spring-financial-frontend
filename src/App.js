@@ -16,6 +16,7 @@ import FAQ from "./components/FAQ";
 import AccountDetails from "./components/AccountDetails"
 import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
+import Register from "./components/Register";
 import Help from "./components/Help";
 
 function App() {
@@ -26,11 +27,11 @@ function App() {
         <Route exact path="/faq" component={FAQ} />
         <Route path="/about" component={About} />
         <Route path="/branch-offices" component={BranchOffices} />
-        <Route path="/customer/:pid" component={UserDetails} />
-        <Route path="/account/:id" component={AccountDetails} />
+        <Route path="/profile" component={UserDetails} />
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/contact" component={Contact} />
-        <Route path="/help" component={Help} />
+        <Route path="/account/:id" component={AccountDetails} />
         <Route path="/" component={Home} />
       </Switch>
       {/* <Slider slides={SliderData} />
