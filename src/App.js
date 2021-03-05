@@ -15,6 +15,7 @@ import UserDetails from "./components/UserDetails";
 import FAQ from "./components/FAQ";
 import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
+import Help from "./components/Help";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
         <Route path="/branch-offices" component={BranchOffices} />
         <Route path="/customer/:pid" component={UserDetails} />
         <Route path="/login" component={Login} />
-        <Route path="/contact" component={Contact}/>
+        <Route path="/contact" component={Contact} />
+        <Route path="/help" component={Help} />
         <Route path="/" component={Home} />
       </Switch>
       {/* <Slider slides={SliderData} />
