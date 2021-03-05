@@ -106,11 +106,13 @@ const UserDetails = () => {
             </div>
           </ColumnRight>
         </Container>
-        <div style={{ textAlign: "center" }}>
-          <Button variant="danger" size="lg" style={{ marginRight: "3rem" }}>
-            View Accounts
-          </Button>
-        </div>
+        {userData !== null ? (
+          <div style={{ textAlign: "center" }}>
+            <Button variant="danger" size="lg" style={{ marginRight: "3rem" }} href={`/account/${userData.id}`}>
+                View Accounts
+            </Button>
+          </div>
+        ) : null}
       </Section>
       <Footer />
     </>

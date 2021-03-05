@@ -13,9 +13,11 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import UserDetails from "./components/UserDetails";
 import FAQ from "./components/FAQ";
+import AccountDetails from "./components/AccountDetails"
 import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
+import Help from "./components/Help";
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/contact" component={Contact} />
+        <Route path="/account/:id" component={AccountDetails} />
         <Route path="/" component={Home} />
       </Switch>
       {/* <Slider slides={SliderData} />
