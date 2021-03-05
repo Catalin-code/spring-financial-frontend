@@ -32,3 +32,7 @@ M
 src/components/UserDetails.js,1/8/18be1e19349d002c7be674422ab676ad76ace1c6
 P
  src/components/AccountDetails.js,d/7/d7064adf49bb0d0b12e952a6100a23f1e6f8200d
+H
+src/components/Button.js,b/5/b5840b28802b42e734ba24005ac8c27c430bcce3
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
