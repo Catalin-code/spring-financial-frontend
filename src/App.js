@@ -14,8 +14,6 @@ import Login from "./components/Login";
 import UserDetails from "./components/UserDetails";
 import FAQ from "./components/FAQ";
 import AccountDetails from "./components/AccountDetails"
-import "bootstrap/dist/css/bootstrap.min.css";
-=======
 import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
 import Help from "./components/Help";
