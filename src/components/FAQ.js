@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import InfoSection from "./InfoSection";
 import { InfoData3 } from "../data/InfoData";
 import React from "react";
@@ -81,6 +82,7 @@ function FAQ(){
                 />
               </Container>
           </Section>
+          <Footer />
         </>
     );
 }
