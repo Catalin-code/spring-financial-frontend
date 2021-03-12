@@ -69,7 +69,7 @@ const ColumnRight = styled.div`
       height: 90%;
     }
   }
-    h1 {
+  h1 {
     margin-bottom: 1rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
@@ -89,105 +89,104 @@ const ColumnRight = styled.div`
 `;
 
 function AccountDetails() {
-    let { id } = useParams();
-    const baseUrl = "http://localhost:8080/api/account/customerId";
-    const baseUrlCard = "http://localhost:8080/api/card/accountId";
+  let { id } = useParams();
+  const baseUrl = "http://localhost:8080/api/test/account/customerId";
+  const baseUrlCard = "http://localhost:8080/api/test/card/accountId";
 
-    let [accountData, setAccountData] = useState([]);
-    let [cardData, setCardData] = useState([]);
-    let [accountId, setAccountId] = useState(id);
+  let [accountData, setAccountData] = useState([]);
+  let [cardData, setCardData] = useState([]);
+  let [accountId, setAccountId] = useState(id);
 
-    const getData = async (customerId) => {
-        const request = await fetch(`${baseUrl}=${customerId}`);
+  const getData = async (customerId) => {
+    const request = await fetch(`${baseUrl}=${customerId}`);
 
-        if (request.ok) {
-            const data = await request.json();
-            console.log(data)
-            const cid = data
-                .map((d) => d.customerId)
-                .filter((e, i, a) => !a.slice(0, i).includes(e))
-                .pop();
-            setAccountData(data);
-            setAccountId(cid);
-        }
-    };
+    if (request.ok) {
+      const data = await request.json();
+      console.log(data);
+      const cid = data
+        .map((d) => d.customerId)
+        .filter((e, i, a) => !a.slice(0, i).includes(e))
+        .pop();
+      setAccountData(data);
+      setAccountId(cid);
+    }
+  };
 
-    const getCardData = async (accountId) => {
-        const request = await fetch(`${baseUrlCard}=${accountId}`);
-        if (request.ok) {
-            const data = await request.json();
-            setCardData(data);
-            console.log(cardData);
-        }
-    };
+  const getCardData = async (accountId) => {
+    const request = await fetch(`${baseUrlCard}=${accountId}`);
+    if (request.ok) {
+      const data = await request.json();
+      setCardData(data);
+      console.log(cardData);
+    }
+  };
 
-    useEffect(() => {
-        getData(id);
-        getCardData(accountId);
-    }, [accountId]);
+  useEffect(() => {
+    getData(id);
+    getCardData(accountId);
+  }, [accountId]);
 
+  return (
+    <>
+      <Navbar />
+      <Section>
+        <Container>
+          {accountData !== null ? (
+            <div>
+              {accountData.map((a, i) => (
+                <ColumnLeft key={i}>
+                  <div>
+                    <h1> </h1>
+                    <h1>Account number</h1>
+                    <p>{a.account_number}</p>
+                    <hr />
+                    <h1>Amount</h1>
+                    <p>{a.amount}</p>
+                    <hr />
+                    <h1>Currency</h1>
+                    <p>{a.currency}</p>
+                    <hr />
+                    <h1>Interest</h1>
+                    <p>{a.interest}</p>
+                    <hr />
+                    <h1>Type</h1>
+                    <p>{a.type}</p>
+                    <hr />
+                  </div>
+                </ColumnLeft>
+              ))}
+            </div>
+          ) : null}
 
-    return (
-        <>
-            <Navbar />
-            <Section>
-                <Container>
-                        {accountData !== null ? (
-                            <div>
-                                { accountData.map( (a, i) => (
-                                    <ColumnLeft key={i}>
-                                        <div>
-                                            <h1>           </h1>
-                                            <h1>Account number</h1>
-                                            <p>{ a.account_number }</p>
-                                            <hr />
-                                            <h1>Amount</h1>
-                                            <p>{ a.amount }</p>
-                                            <hr />
-                                            <h1>Currency</h1>
-                                            <p>{ a.currency }</p>
-                                            <hr/>
-                                            <h1>Interest</h1>
-                                            <p>{ a.interest }</p>
-                                            <hr/>
-                                            <h1>Type</h1>
-                                            <p>{ a.type }</p>
-                                            <hr/>
-                                        </div>
-                                    </ColumnLeft>
-                                )) }
-                            </div>
-                        ) : null}
-
-                    <ColumnRight>
-                        {cardData && cardData.length ? (
-                            <div>
-                                { cardData.map( (a, i) => (
-                                    <div key={i}>
-                                        <h1>Card number</h1>
-                                        <p>{ a.cardNumber }</p>
-                                        <hr />
-                                        <h1>CVV</h1>
-                                        <p>{ a.cvv }</p>
-                                        <hr />
-                                        <h1>First Name</h1>
-                                        <p>{ a.customerFirstName }</p>
-                                        <hr />
-                                        <h1>Last Name</h1>
-                                        <p>{ a.customerLastName }</p>
-                                        <hr/>
-                                        <h1>Type</h1>
-                                        <p>{ a.accountType }</p>
-                                        <hr/>
-                                    </div>
-                                )) }
-                            </div>
-                        ) : null}
-                    </ColumnRight>
-                </Container>
-            </Section>
-        </>
-    );
+          <ColumnRight>
+            {cardData && cardData.length ? (
+              <div>
+                {cardData.map((a, i) => (
+                  <div key={i}>
+                    <h1>Card number</h1>
+                    <p>{a.cardNumber}</p>
+                    <hr />
+                    <h1>CVV</h1>
+                    <p>{a.cvv}</p>
+                    <hr />
+                    <h1>First Name</h1>
+                    <p>{a.customerFirstName}</p>
+                    <hr />
+                    <h1>Last Name</h1>
+                    <p>{a.customerLastName}</p>
+                    <hr />
+                    <h1>Type</h1>
+                    <p>{a.accountType}</p>
+                    <hr />
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </ColumnRight>
+        </Container>
+      </Section>
+    </>
+  );
 }
 
 export default AccountDetails;

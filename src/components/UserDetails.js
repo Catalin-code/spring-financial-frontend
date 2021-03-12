@@ -106,10 +106,15 @@ const UserDetails = () => {
             </div>
           </ColumnRight>
         </Container>
-        {userData !== null ? (
+        {currentUser !== null ? (
           <div style={{ textAlign: "center" }}>
-            <Button variant="danger" size="lg" style={{ marginRight: "3rem" }} href={`/account/${userData.id}`}>
-                View Accounts
+            <Button
+              variant="danger"
+              size="lg"
+              style={{ marginRight: "3rem" }}
+              href={`/account/${currentUser.id}`}
+            >
+              View Accounts
             </Button>
           </div>
         ) : null}

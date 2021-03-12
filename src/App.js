@@ -13,7 +13,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import UserDetails from "./components/UserDetails";
 import FAQ from "./components/FAQ";
-import AccountDetails from "./components/AccountDetails"
+import AccountDetails from "./components/AccountDetails";
 import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
@@ -32,6 +32,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/contact" component={Contact} />
         <Route path="/account/:id" component={AccountDetails} />
+        <Route path="/help" component={Help} />
         <Route path="/" component={Home} />
       </Switch>
       {/* <Slider slides={SliderData} />
