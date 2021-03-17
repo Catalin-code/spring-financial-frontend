@@ -53,6 +53,10 @@ const Container = styled.div`
     text-align: center;
     align-items: center;
   }
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
 `;
 const styles = {
     bgColor: '#000d1a',
@@ -80,7 +84,7 @@ function FAQ(){
                   data={data}
                   styles={styles}
                 />
-              </Container>
+            </Container>
           </Section>
           <Footer />
         </>
