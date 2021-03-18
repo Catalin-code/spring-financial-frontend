@@ -15,14 +15,24 @@ const Section = styled.section`
   background-color: #000d1a;
 `;
 const Container = styled.div`
-  padding: 15rem calc((100vw - 1300px) / 2);
+  padding: 20rem calc((100vw - 1300px) / 4);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 800px;
+  grid-template-rows: 100px;
   color: white;
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+`;
+
+var divStyle = {
+  marginRight: "3rem",
+  width: "11rem",
+};
+
+const Container1 = styled.div`
+  padding-top: 10rem;
+  color: white;
 `;
 const ColumnLeft = styled.div`
   display: flex;
@@ -66,7 +76,62 @@ const ColumnRight = styled.div`
 
 const UserDetails = () => {
   const currentUser = AuthService.getCurrentUser();
-
+  let isAdmin = "false";
+  if (currentUser.roles[0] === "ROLE_ADMIN") {
+    isAdmin = "true";
+  }
+  if (isAdmin === "true") {
+    return (
+      <>
+        <Navbar />
+        <Section>
+          <Container1>
+            <div style={{ textAlign: "center" }}>
+              <h2>Employee Operations</h2>
+            </div>
+          </Container1>
+          <Container>
+            <div style={{ textAlign: "center" }}>
+              <Button
+                variant="danger"
+                size="lg"
+                style={{ marginRight: "3rem" }}
+                href={`/register`}
+              >
+                Add customer
+              </Button>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <Button
+                variant="danger"
+                size="lg"
+                style={{ marginRight: "3rem" }}
+                href={`/new-account`}
+              >
+                Open Account
+              </Button>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <Button variant="danger" size="lg" style={divStyle} href={``}>
+                Issue Card
+              </Button>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <Button
+                variant="danger"
+                size="lg"
+                style={{ marginRight: "3rem" }}
+                href={``}
+              >
+                Close Account
+              </Button>
+            </div>
+          </Container>
+        </Section>
+        <Footer />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
@@ -112,7 +177,7 @@ const UserDetails = () => {
               variant="danger"
               size="lg"
               style={{ marginRight: "3rem" }}
-              href={`/account/${currentUser.id}`}
+              href={`/account/${currentUser.username}`}
             >
               View Accounts
             </Button>
