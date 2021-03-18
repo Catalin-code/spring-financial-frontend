@@ -7,7 +7,7 @@ const createAccount = (
   type,
   currency,
   amount,
-  account_number,
+  accountNumber,
   interest
 ) => {
   return axios.post(API_URL + "new-account", {
@@ -15,7 +15,7 @@ const createAccount = (
     type,
     currency,
     amount,
-    account_number,
+    accountNumber,
     interest,
   });
 };

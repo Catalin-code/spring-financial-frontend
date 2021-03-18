@@ -15,7 +15,7 @@ const Section = styled.section`
   background-color: #000d1a;
 `;
 const Container = styled.div`
-  padding: 20rem calc((100vw - 1300px) / 4);
+  padding: 30rem calc((100vw - 1300px) / 3);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100px;
@@ -112,7 +112,12 @@ const UserDetails = () => {
               </Button>
             </div>
             <div style={{ textAlign: "center" }}>
-              <Button variant="danger" size="lg" style={divStyle} href={``}>
+              <Button
+                variant="danger"
+                size="lg"
+                style={divStyle}
+                href={`/new-card`}
+              >
                 Issue Card
               </Button>
             </div>
@@ -166,23 +171,20 @@ const UserDetails = () => {
             </div>
           </ColumnLeft>
           <ColumnRight>
-            <div>
-              <h3>Accounts / Cards placeholder div</h3>
-            </div>
+            {currentUser !== null ? (
+              <div style={{ textAlign: "center" }}>
+                <Button
+                  variant="danger"
+                  size="lg"
+                  style={{ marginRight: "3rem" }}
+                  href={`/account/${currentUser.username}`}
+                >
+                  View Accounts
+                </Button>
+              </div>
+            ) : null}
           </ColumnRight>
         </Container>
-        {currentUser !== null ? (
-          <div style={{ textAlign: "center" }}>
-            <Button
-              variant="danger"
-              size="lg"
-              style={{ marginRight: "3rem" }}
-              href={`/account/${currentUser.username}`}
-            >
-              View Accounts
-            </Button>
-          </div>
-        ) : null}
       </Section>
       <Footer />
     </>

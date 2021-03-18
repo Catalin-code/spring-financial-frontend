@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import styled from "styled-components";
 
-import AccountService from "../services/accountService";
+import CardService from "../services/cardService";
 import AuthService from "../services/auth.service";
 
 const required = (value) => {
@@ -40,51 +40,63 @@ const Container = styled.div`
   }
 `;
 
-const CreateAccount = (props) => {
+const CreateCard = (props) => {
   const form = useRef();
   const checkBtn = useRef();
   const currentUser = AuthService.getCurrentUser();
 
-  const [customerPid, setCustomerPid] = useState("");
-  const [type, setType] = useState("");
-  const [currency, setCurrency] = useState("");
-  const [amount, setAmount] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
-  const [interest, setInterest] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [accountType, setAccountType] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [customerFirstName, setCustomerFirstName] = useState("");
+  const [customerLastName, setCustomerLastName] = useState("");
+  const [contactless, setContactless] = useState("false");
   const [successful, setSuccessful] = useState("false");
   const [message, setMessage] = useState("");
-
-  const onChangeCustomerPid = (e) => {
-    const customerPid = e.target.value;
-    setCustomerPid(customerPid);
-  };
-
-  const onChangeType = (e) => {
-    const type = e.target.value;
-    setType(type);
-  };
-
-  const onChangeCurrency = (e) => {
-    const currency = e.target.value;
-    setCurrency(currency);
-  };
-
-  const onChangeAmount = (e) => {
-    const amount = e.target.value;
-    setAmount(amount);
-  };
 
   const onChangeAccountNumber = (e) => {
     const accountNumber = e.target.value;
     setAccountNumber(accountNumber);
   };
 
-  const onChangeInterest = (e) => {
-    const interest = e.target.value;
-    setInterest(interest);
+  const onChangeCardNumber = (e) => {
+    const cardNumber = e.target.value;
+    setCardNumber(cardNumber);
   };
 
-  const handleCreateAccount = (e) => {
+  const onChangeAccountType = (e) => {
+    const accountType = e.target.value;
+    setAccountType(accountType);
+  };
+
+  const onChangeExpirationDate = (e) => {
+    const expirationDate = e.target.value;
+    setExpirationDate(expirationDate);
+  };
+
+  const onChangeCvv = (e) => {
+    const cvv = e.target.value;
+    setCvv(cvv);
+  };
+
+  const onChangeCustomerFirstName = (e) => {
+    const customerFirstName = e.target.value;
+    setCustomerFirstName(customerFirstName);
+  };
+
+  const onChangeCustomerLastName = (e) => {
+    const customerLastName = e.target.value;
+    setCustomerLastName(customerLastName);
+  };
+
+  const onChangeContactless = (e) => {
+    const contactless = e.target.checked;
+    setContactless(contactless);
+  };
+
+  const handleCreateCard = (e) => {
     e.preventDefault();
 
     setMessage("");
@@ -93,13 +105,15 @@ const CreateAccount = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AccountService.createAccount(
-        customerPid,
-        type,
-        currency,
-        amount,
+      CardService.createCard(
         accountNumber,
-        interest
+        cardNumber,
+        accountType,
+        expirationDate,
+        cvv,
+        customerFirstName,
+        customerLastName,
+        contactless
       ).then(
         (response) => {
           setMessage(response.data.message);
@@ -120,6 +134,8 @@ const CreateAccount = (props) => {
     }
   };
 
+  console.log(contactless);
+
   let isAdmin = "false";
   if (currentUser.roles[0] === "ROLE_ADMIN") {
     isAdmin = "true";
@@ -130,57 +146,9 @@ const CreateAccount = (props) => {
         <Navbar />
         <Section>
           <Container>
-            <Form onSubmit={handleCreateAccount} ref={form}>
-              <h3>Create Account</h3>
+            <Form onSubmit={handleCreateCard} ref={form}>
+              <h3>Issue Card</h3>
               <div>
-                <div className="form-group align-items-center">
-                  <label htmlFor="customerPid">Customer Pid</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="customerPid"
-                    value={customerPid}
-                    onChange={onChangeCustomerPid}
-                    validations={[required]}
-                  />
-                </div>
-
-                <div className="form-group align-items-center">
-                  <label htmlFor="type">Type</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="type"
-                    value={type}
-                    onChange={onChangeType}
-                    validations={[required]}
-                  />
-                </div>
-
-                <div className="form-group align-items-center">
-                  <label htmlFor="currency">Currency</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="currency"
-                    value={currency}
-                    onChange={onChangeCurrency}
-                    validations={[required]}
-                  />
-                </div>
-
-                <div className="form-group align-items-center">
-                  <label htmlFor="amount">Amount</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="amount"
-                    value={amount}
-                    onChange={onChangeAmount}
-                    validations={[required]}
-                  />
-                </div>
-
                 <div className="form-group align-items-center">
                   <label htmlFor="accountNumber">Account Number</label>
                   <Input
@@ -194,20 +162,91 @@ const CreateAccount = (props) => {
                 </div>
 
                 <div className="form-group align-items-center">
-                  <label htmlFor="interest">Interest</label>
+                  <label htmlFor="cardNumber">Card Number</label>
+                  <Input
+                    type="number"
+                    className="form-control"
+                    name="cardNumber"
+                    value={cardNumber}
+                    onChange={onChangeCardNumber}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group align-items-center">
+                  <label htmlFor="accountType">Account Type</label>
                   <Input
                     type="text"
                     className="form-control"
-                    name="interest"
-                    value={interest}
-                    onChange={onChangeInterest}
+                    name="accountType"
+                    value={accountType}
+                    onChange={onChangeAccountType}
                     validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group align-items-center">
+                  <label htmlFor="expirationDate">Expiration Date</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="expirationDate"
+                    value={expirationDate}
+                    onChange={onChangeExpirationDate}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group align-items-center">
+                  <label htmlFor="cvv">Cvv</label>
+                  <Input
+                    type="number"
+                    className="form-control"
+                    name="cvv"
+                    value={cvv}
+                    onChange={onChangeCvv}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group align-items-center">
+                  <label htmlFor="customerFirstName">First Name</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="customerFirstName"
+                    value={customerFirstName}
+                    onChange={onChangeCustomerFirstName}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group align-items-center">
+                  <label htmlFor="customerLastName">Last Name</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="customerLastName"
+                    value={customerLastName}
+                    onChange={onChangeCustomerLastName}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group align-items-center">
+                  <label htmlFor="contactless">Contactless</label>
+                  <Input
+                    type="checkbox"
+                    className="form-control"
+                    name="contactless"
+                    value={contactless}
+                    onChange={onChangeContactless}
                   />
                 </div>
 
                 <div className="form-group">
                   <button className="btn btn-primary btn-block">
-                    Open Account
+                    Create Card
                   </button>
                 </div>
               </div>
@@ -233,4 +272,4 @@ const CreateAccount = (props) => {
   }
 };
 
-export default CreateAccount;
+export default CreateCard;
