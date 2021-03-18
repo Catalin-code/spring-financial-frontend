@@ -8,11 +8,11 @@ import axios from "axios";
 const Section = styled.section`
   width: 100%;
   height: 100%;
-  padding: 4rem 0rem;
+  padding: 0rem 0rem;
   background-color: #000d1a;
 `;
 const Container = styled.div`
-  padding: 15rem calc((100vw - 1300px) / 2);
+  padding: 5rem calc((100vw - 1300px) / 2);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 800px;
@@ -31,7 +31,7 @@ const ColumnLeft = styled.div`
   order: ${({ reverse }) => (reverse ? "2" : "1")};
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
 
@@ -51,6 +51,9 @@ const ColumnLeft = styled.div`
 
 const ColumnRight = styled.div`
   padding: 1rem 2rem;
+  margin-bottom: 8rem;
+  margin-top: 5rem;
+  line-height: 0.3;
   order: ${({ reverse }) => (reverse ? "1" : "2")};
   display: flex;
   justify-content: center;
@@ -70,7 +73,7 @@ const ColumnRight = styled.div`
     }
   }
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
 
@@ -91,7 +94,7 @@ const ColumnRight = styled.div`
 function AccountDetails() {
   let { id } = useParams();
   const baseUrl = "http://localhost:8080/api/test/account/customerPid";
-  const baseUrlCard = "http://localhost:8080/api/test/card/accountId";
+  const baseUrlCard = "http://localhost:8080/api/test/card/accountNumber";
 
   let [accountData, setAccountData] = useState([]);
   let [cardData, setCardData] = useState([]);
@@ -104,7 +107,7 @@ function AccountDetails() {
       const data = await request.json();
       console.log(data);
       const cid = data
-        .map((d) => d.customerId)
+        .map((d) => d.accountNumber)
         .filter((e, i, a) => !a.slice(0, i).includes(e))
         .pop();
       setAccountData(data);
@@ -112,12 +115,12 @@ function AccountDetails() {
     }
   };
 
-  const getCardData = async (accountId) => {
-    const request = await fetch(`${baseUrlCard}=${accountId}`);
+  const getCardData = async (accountNumber) => {
+    const request = await fetch(`${baseUrlCard}=${accountNumber}`);
     if (request.ok) {
       const data = await request.json();
       setCardData(data);
-      console.log(cardData);
+      console.log(data);
     }
   };
 
@@ -130,6 +133,28 @@ function AccountDetails() {
     <>
       <Navbar />
       <Section>
+        <div style={{ display: "flex" }}>
+          <h1
+            style={{
+              paddingLeft: "430px",
+              paddingTop: "300px",
+              paddingBottom: "0px",
+              color: "white",
+            }}
+          >
+            Accounts
+          </h1>
+          <h1
+            style={{
+              paddingLeft: "600px",
+              paddingTop: "300px",
+              paddingBottom: "30px",
+              color: "white",
+            }}
+          >
+            Cards
+          </h1>
+        </div>
         <Container>
           {accountData !== null ? (
             <div>
@@ -160,12 +185,9 @@ function AccountDetails() {
 
           <ColumnRight>
             {cardData && cardData.length ? (
-              <div>
+              <div style={{ border: "2px solid white", padding: "40px" }}>
                 {cardData.map((a, i) => (
-                  <div
-                    key={i}
-                    style={{ border: "2px solid white", padding: "40px" }}
-                  >
+                  <div key={i}>
                     <h1>Card number</h1>
                     <p>{a.cardNumber}</p>
                     <hr />
