@@ -18,6 +18,7 @@ import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
 import Help from "./components/Help";
+import WebsiteFeedback from "./components/WebsiteFeedback";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/contact" component={Contact} />
         <Route path="/account/:id" component={AccountDetails} />
+        <Route path="/website-feedback" component={WebsiteFeedback} />
         <Route path="/help" component={Help} />
         <Route path="/" component={Home} />
       </Switch>
