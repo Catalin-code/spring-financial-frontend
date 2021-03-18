@@ -90,7 +90,7 @@ const ColumnRight = styled.div`
 
 function AccountDetails() {
   let { id } = useParams();
-  const baseUrl = "http://localhost:8080/api/test/account/customerId";
+  const baseUrl = "http://localhost:8080/api/test/account/customerPid";
   const baseUrlCard = "http://localhost:8080/api/test/card/accountId";
 
   let [accountData, setAccountData] = useState([]);
@@ -135,10 +135,10 @@ function AccountDetails() {
             <div>
               {accountData.map((a, i) => (
                 <ColumnLeft key={i}>
-                  <div>
+                  <div style={{ border: "2px solid white", padding: "40px" }}>
                     <h1> </h1>
                     <h1>Account number</h1>
-                    <p>{a.account_number}</p>
+                    <p>{a.accountNumber}</p>
                     <hr />
                     <h1>Amount</h1>
                     <p>{a.amount}</p>
@@ -162,7 +162,10 @@ function AccountDetails() {
             {cardData && cardData.length ? (
               <div>
                 {cardData.map((a, i) => (
-                  <div key={i}>
+                  <div
+                    key={i}
+                    style={{ border: "2px solid white", padding: "40px" }}
+                  >
                     <h1>Card number</h1>
                     <p>{a.cardNumber}</p>
                     <hr />
