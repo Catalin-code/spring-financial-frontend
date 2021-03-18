@@ -18,6 +18,10 @@ import BranchOffices from "./components/BranchOffices";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
 import Help from "./components/Help";
+import WebsiteFeedback from "./components/WebsiteFeedback";
+import CreateAccount from "./components/CreateAccount";
+import CreateCard from "./components/CreateCard";
+import MakeTransaction from "./components/Transaction";
 
 function App() {
   return (
@@ -30,8 +34,12 @@ function App() {
         <Route path="/profile" component={UserDetails} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/new-account" component={CreateAccount} />
+        <Route path="/new-card" component={CreateCard} />
+        <Route path="/make-transaction" component={MakeTransaction} />
         <Route path="/contact" component={Contact} />
         <Route path="/account/:id" component={AccountDetails} />
+        <Route path="/website-feedback" component={WebsiteFeedback} />
         <Route path="/help" component={Help} />
         <Route path="/" component={Home} />
       </Switch>

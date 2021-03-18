@@ -39,7 +39,7 @@ const ColumnLeft = styled.div`
   margin-top: 20px;
   }
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
 
@@ -59,6 +59,9 @@ const ColumnLeft = styled.div`
 
 const ColumnRight = styled.div`
   padding: 1rem 2rem;
+  margin-bottom: 8rem;
+  margin-top: 5rem;
+  line-height: 0.3;
   order: ${({ reverse }) => (reverse ? "1" : "2")};
   display: flex;
   justify-content: center;
@@ -70,7 +73,7 @@ const ColumnRight = styled.div`
   }
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
 
@@ -90,8 +93,8 @@ const ColumnRight = styled.div`
 
 function AccountDetails() {
   let { id } = useParams();
-  const baseUrl = "http://localhost:8080/api/test/account/customerId";
-  const baseUrlCard = "http://localhost:8080/api/test/card/accountId";
+  const baseUrl = "http://localhost:8080/api/test/account/customerPid";
+  const baseUrlCard = "http://localhost:8080/api/test/card/accountNumber";
 
   let [accountData, setAccountData] = useState([]);
   let [cardData, setCardData] = useState([]);
@@ -104,7 +107,7 @@ function AccountDetails() {
       const data = await request.json();
       console.log(data);
       const cid = data
-        .map((d) => d.customerId)
+        .map((d) => d.accountNumber)
         .filter((e, i, a) => !a.slice(0, i).includes(e))
         .pop();
       setAccountData(data);
@@ -112,12 +115,12 @@ function AccountDetails() {
     }
   };
 
-  const getCardData = async (accountId) => {
-    const request = await fetch(`${baseUrlCard}=${accountId}`);
+  const getCardData = async (accountNumber) => {
+    const request = await fetch(`${baseUrlCard}=${accountNumber}`);
     if (request.ok) {
       const data = await request.json();
       setCardData(data);
-      console.log(cardData);
+      console.log(data);
     }
   };
 
@@ -130,6 +133,28 @@ function AccountDetails() {
     <>
       <Navbar />
       <Section>
+        <div style={{ display: "flex" }}>
+          <h1
+            style={{
+              paddingLeft: "430px",
+              paddingTop: "300px",
+              paddingBottom: "0px",
+              color: "white",
+            }}
+          >
+            Accounts
+          </h1>
+          <h1
+            style={{
+              paddingLeft: "600px",
+              paddingTop: "300px",
+              paddingBottom: "30px",
+              color: "white",
+            }}
+          >
+            Cards
+          </h1>
+        </div>
         <Container>
           {accountData !== null ? (
             <div>
@@ -139,7 +164,7 @@ function AccountDetails() {
                   <div className={"asdf"}>
                     <h1> </h1>
                     <h1>Account number</h1>
-                    <p>{a.account_number}</p>
+                    <p>{a.accountNumber}</p>
                     <hr />
                     <h1>Amount</h1>
                     <p>{a.amount}</p>
@@ -161,7 +186,7 @@ function AccountDetails() {
           ) : null}
           <ColumnRight>
             {cardData && cardData.length ? (
-              <div>
+              <div style={{ border: "2px solid white", padding: "40px" }}>
                 {cardData.map((a, i) => (
                   <div key={i}>
                     <h1>Card number</h1>
