@@ -8,18 +8,24 @@ import axios from "axios";
 const Section = styled.section`
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   padding: 4rem 0rem;
   background-color: #000d1a;
 `;
 const Container = styled.div`
-  padding: 15rem calc((100vw - 1300px) / 2);
+  // padding: 15rem calc((100vw - 1300px) / 2);
   display: grid;
+  gap: 20px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 800px;
   color: white;
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
 `;
 const ColumnLeft = styled.div`
   display: flex;
@@ -29,7 +35,9 @@ const ColumnLeft = styled.div`
   line-height: 0.1;
   padding: 1rem 2rem;
   order: ${({ reverse }) => (reverse ? "2" : "1")};
-
+  .asdf+asdf {
+  margin-top: 20px;
+  }
   h1 {
     margin-bottom: 1rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
@@ -54,21 +62,13 @@ const ColumnRight = styled.div`
   order: ${({ reverse }) => (reverse ? "1" : "2")};
   display: flex;
   justify-content: center;
-  align-items: center;
+  line-height: 0.1;
+  margin-top: 16px;
+  align-items: flex-start;
   @media screen and (max-width: 768px) {
     order: ${({ reverse }) => (reverse ? "2" : "1")};
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    @media screen and (max-width: 768px) {
-      width: 90%;
-      height: 90%;
-    }
-  }
   h1 {
     margin-bottom: 1rem;
     font-size: clamp(1.5rem, 6vw, 2rem);
@@ -134,8 +134,9 @@ function AccountDetails() {
           {accountData !== null ? (
             <div>
               {accountData.map((a, i) => (
+                  // <Container>
                 <ColumnLeft key={i}>
-                  <div>
+                  <div className={"asdf"}>
                     <h1> </h1>
                     <h1>Account number</h1>
                     <p>{a.account_number}</p>
@@ -154,10 +155,10 @@ function AccountDetails() {
                     <hr />
                   </div>
                 </ColumnLeft>
+                  // </Container>
               ))}
             </div>
           ) : null}
-
           <ColumnRight>
             {cardData && cardData.length ? (
               <div>
