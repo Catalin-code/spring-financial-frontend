@@ -181,6 +181,14 @@ const UserDetails = () => {
                 >
                   View Accounts
                 </Button>
+                <Button
+                  variant="danger"
+                  size="lg"
+                  style={{ marginRight: "3rem" }}
+                  href={`/make-transaction`}
+                >
+                  Make Transaction
+                </Button>
               </div>
             ) : null}
           </ColumnRight>

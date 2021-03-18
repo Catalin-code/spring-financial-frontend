@@ -20,6 +20,7 @@ import Register from "./components/Register";
 import Help from "./components/Help";
 import CreateAccount from "./components/CreateAccount";
 import CreateCard from "./components/CreateCard";
+import MakeTransaction from "./components/Transaction";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/new-account" component={CreateAccount} />
         <Route path="/new-card" component={CreateCard} />
+        <Route path="/make-transaction" component={MakeTransaction} />
         <Route path="/contact" component={Contact} />
         <Route path="/account/:id" component={AccountDetails} />
         <Route path="/help" component={Help} />
